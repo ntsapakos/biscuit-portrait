@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="light dark" />
+<title>Portrait of Biscuit</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  /* ---- Wall (theme-aware): the room's light changes, the painting doesn't ---- */
+  :root {
+    --wall: #D9DED6;
+    --wall-hi: #EAEDE7;
+    --ink: #23291F;
+    --ink-soft: #5A6152;
+    --rule: #C0C6B8;
+    --brass: #8E6320;
+    --cast: rgba(32, 40, 30, 0.22);
+
+    /* ---- The painting: constant in any light ---- */
+    --frame: #2B2723;
+    --frame-hi: #4A423A;
+    --mat-edge: #DCD2BE;
+    --fur: #C68A46;
+    --fur-dark: #A8712F;
+    --cream: #F0DFC0;
+    --cream-dim: #E1CBA4;
+    --dark: #2C2823;
+    --tongue: #CE6B62;
+    --tag: #C9922F;
+
+    --serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+    --sans: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --wall: #141711;
+      --wall-hi: #1E221A;
+      --ink: #E7E9E0;
+      --ink-soft: #9AA191;
+      --rule: #2F342B;
+      --brass: #C99C4C;
+      --cast: rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --wall: #141711;
+    --wall-hi: #1E221A;
+    --ink: #E7E9E0;
+    --ink-soft: #9AA191;
+    --rule: #2F342B;
+    --brass: #C99C4C;
+    --cast: rgba(0, 0, 0, 0.6);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    padding: clamp(24px, 6vw, 72px) clamp(18px, 5vw, 48px);
+    background:
+      radial-gradient(110% 70% at 50% -10%, var(--wall-hi), transparent 62%),
+      var(--wall);
+    color: var(--ink);
+    font-family: var(--serif);
+    display: grid;
+    place-items: start center;
+  }
+
+  .plate {
+    width: 100%;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(22px, 4vw, 34px);
+    animation: rise 700ms cubic-bezier(0.2, 0.7, 0.25, 1) both;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+  }
+
+  /* ---- Frame ---- */
+  .frame {
+    border: 13px solid var(--frame);
+    border-top-color: var(--frame-hi);
+    border-radius: 3px;
+    padding: clamp(16px, 4vw, 30px);
+    background: radial-gradient(115% 85% at 50% 10%, #FCF9F2, #EEE7D8 66%, #E3DAC6);
+    box-shadow:
+      inset 0 0 0 1px var(--mat-edge),
+      inset 0 2px 14px rgba(120, 104, 76, 0.14),
+      0 26px 44px -18px var(--cast),
+      0 3px 10px -4px var(--cast);
+  }
+
+  .frame svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* One wag, and only when you look at him */
+  .tail {
+    transform-box: view-box;
+    transform-origin: 266px 374px;
+  }
+
+  .frame:hover .tail {
+    animation: wag 460ms ease-in-out infinite alternate;
+  }
+
+  @keyframes wag {
+    from { transform: rotate(-7deg); }
+    to { transform: rotate(8deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .plate { animation: none; }
+    .frame:hover .tail { animation: none; }
+  }
+
+  /* ---- Gallery label ---- */
+  .label {
+    border-top: 1px solid var(--rule);
+    padding-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .name {
+    margin: 0;
+    font-size: clamp(26px, 5vw, 32px);
+    font-weight: 400;
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+  }
+
+  .name em {
+    font-style: italic;
+  }
+
+  .facts {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 7px 18px;
+    align-items: baseline;
+  }
+
+  .facts dt {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+
+  .facts dd {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.55;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .facts .brass {
+    color: var(--brass);
+  }
+
+  .wall-text {
+    margin: 0;
+    max-width: 46ch;
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+  }
+</style>
+</head>
+<body>
+
+<div class="plate">
+  <div class="frame">
+    <svg viewBox="0 0 400 470" role="img"
+         aria-label="Illustration of a golden dog sitting up straight, with floppy ears, a cream chest and paws, a brass collar tag, and a curled tail.">
+      <defs>
+        <radialGradient id="vol" cx="32%" cy="18%" r="82%">
+          <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.18" />
+          <stop offset="1" stop-color="#FFFFFF" stop-opacity="0" />
+        </radialGradient>
+        <path id="ear"
+              d="M142 96 C 108 100 92 156 102 202 C 110 238 148 240 152 204 C 158 164 158 122 142 96 Z" />
+      </defs>
+
+      <ellipse cx="200" cy="432" rx="118" ry="15" fill="var(--dark)" opacity="0.12" />
+
+      <g class="tail">
+        <path d="M266 374 C 318 384 352 354 338 306" fill="none" stroke="var(--fur-dark)"
+              stroke-width="27" stroke-linecap="round" />
+      </g>
+
+      <!-- body -->
+      <path d="M200 196 C 152 196 128 240 124 300 C 118 366 132 408 200 408 C 268 408 282 366 276 300 C 272 240 248 196 200 196 Z"
+            fill="var(--fur)" />
+      <ellipse cx="142" cy="374" rx="46" ry="40" fill="var(--fur-dark)" opacity="0.5" />
+      <ellipse cx="258" cy="374" rx="46" ry="40" fill="var(--fur-dark)" opacity="0.5" />
+
+      <!-- chest -->
+      <path d="M200 214 C 176 214 164 250 166 300 C 168 348 182 380 200 380 C 218 380 232 348 234 300 C 236 250 224 214 200 214 Z"
+            fill="var(--cream)" />
+
+      <!-- front legs -->
+      <rect x="157" y="322" width="33" height="88" rx="16.5" fill="var(--cream)" />
+      <rect x="210" y="322" width="33" height="88" rx="16.5" fill="var(--cream)" />
+      <ellipse cx="173" cy="402" rx="25" ry="15" fill="var(--cream)" />
+      <ellipse cx="227" cy="402" rx="25" ry="15" fill="var(--cream)" />
+      <g stroke="var(--cream-dim)" stroke-width="3" stroke-linecap="round">
+        <path d="M166 398 v9" />
+        <path d="M180 398 v9" />
+        <path d="M220 398 v9" />
+        <path d="M234 398 v9" />
+      </g>
+
+      <!-- ears, behind the head -->
+      <use href="#ear" fill="var(--fur-dark)" />
+      <use href="#ear" fill="var(--fur-dark)" transform="translate(400,0) scale(-1,1)" />
+
+      <!-- head -->
+      <ellipse cx="200" cy="152" rx="86" ry="78" fill="var(--fur)" />
+      <ellipse cx="200" cy="152" rx="86" ry="78" fill="url(#vol)" />
+      <path d="M188 76 C 192 62 206 60 212 70" fill="none" stroke="var(--fur-dark)"
+            stroke-width="7" stroke-linecap="round" />
+
+      <!-- collar -->
+      <path d="M156 228 C 178 250 222 250 244 228" fill="none" stroke="var(--brass)"
+            stroke-width="13" stroke-linecap="round" opacity="0.95" />
+      <circle cx="200" cy="254" r="11" fill="var(--tag)" />
+      <circle cx="196.5" cy="250.5" r="3" fill="#F2DDAE" opacity="0.85" />
+
+      <!-- muzzle -->
+      <ellipse cx="200" cy="186" rx="54" ry="38" fill="var(--cream)" />
+      <g opacity="0.45" stroke="var(--fur-dark)" stroke-width="6" stroke-linecap="round" fill="none">
+        <path d="M150 122 C 158 116 172 116 180 121" />
+        <path d="M250 122 C 242 116 228 116 220 121" />
+      </g>
+      <path d="M200 148 C 216 148 226 157 221 169 C 217 179 206 186 200 186 C 194 186 183 179 179 169 C 174 157 184 148 200 148 Z"
+            fill="var(--dark)" />
+      <path d="M191 200 C 191 217 209 217 209 200 Z" fill="var(--tongue)" />
+      <g stroke="var(--dark)" stroke-width="5" stroke-linecap="round" fill="none">
+        <path d="M200 186 V199" />
+        <path d="M200 199 C 198 211 184 213 178 203" />
+        <path d="M200 199 C 202 211 216 213 222 203" />
+      </g>
+
+      <!-- eyes -->
+      <circle cx="166" cy="144" r="12" fill="var(--dark)" />
+      <circle cx="234" cy="144" r="12" fill="var(--dark)" />
+      <circle cx="170.5" cy="139.5" r="3.6" fill="#FFFFFF" opacity="0.92" />
+      <circle cx="238.5" cy="139.5" r="3.6" fill="#FFFFFF" opacity="0.92" />
+    </svg>
+  </div>
+
+  <div class="label">
+    <h1 class="name"><em>Biscuit</em>, Sitting</h1>
+    <dl class="facts">
+      <dt>Breed</dt>
+      <dd>Golden retriever, roughly 2 years</dd>
+      <dt>Medium</dt>
+      <dd>Vector shapes, hand-placed</dd>
+      <dt>Collar</dt>
+      <dd class="brass">Brass, one tag, no engraving yet</dd>
+      <dt>Disposition</dt>
+      <dd>Unshakably good</dd>
+    </dl>
+    <p class="wall-text">He has been holding this sit for a while now, on the understanding
+      that someone is about to tell him he is a good boy. Hover over the frame and the tail
+      gives him away.</p>
+  </div>
+</div>
+
+</body>
+</html>
